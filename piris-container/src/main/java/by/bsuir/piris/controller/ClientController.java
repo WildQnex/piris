@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-@RequestMapping("/countries")
+@RequestMapping("/api")
 public class ClientController {
     @Autowired
     private ClientRepositoryImpl clientRepository;
 
-    @GetMapping
+    @GetMapping("/clients")
     @ResponseBody
     public List<Client> getClients() {
         return clientRepository.getClients();

@@ -1,0 +1,30 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.header-icon {
+    color: #5d4037 !important;
+}
+
+.text-border {
+    text-shadow: 1px 1px 2px black, 0 0 1em gray;
+}
+
+.class-img-height {
+    height: 200px;
+}
+
+.class-content-height {
+    height: 150px;
+}
+
+.footer-margin {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+}
