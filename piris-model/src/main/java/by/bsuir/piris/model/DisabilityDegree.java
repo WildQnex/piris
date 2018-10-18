@@ -19,5 +19,5 @@ public class DisabilityDegree {
     private long id;
 
     @Column(name = "disabilityDegree", nullable = false)
-    private String disabilityDegree;
+    private int disabilityDegree;
 }

@@ -4,24 +4,23 @@ import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 @Entity
 @Table(name = "client")
-
-//@JoinColumn(name = "id_disability", referencedColumnName = "id_disability", table = "disability")
-//@SecondaryTable(name = "disability", foreignKey = @ForeignKey(name = "id_disability"))
 public class Client {
 
     @Id
@@ -38,6 +37,7 @@ public class Client {
     @Column(name = "middlename", nullable = false)
     private String middleName;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "birthday", nullable = false)
     private LocalDate birthday;
 
@@ -50,8 +50,9 @@ public class Client {
     @Column(name = "issued_by", nullable = false)
     private String issuedBy;
 
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     @Column(name = "issue_date", nullable = false)
-    private LocalDate localDate;
+    private LocalDate issueDate;
 
     @Column(name = "ident_number", nullable = false)
     private String identNumber;

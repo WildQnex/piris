@@ -1,112 +1,272 @@
 <!DOCTYPE html>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html lang="en">
 <head>
 
     <!-- Access the bootstrap Css like this,
         Spring boot will handle the resource mapping automcatically -->
-    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/app-style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="<c:url value="css/materialize.css"/>" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="<c:url value="css/app-style.css"/>" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="<c:url value="css/style.css"/>" type="text/css" rel="stylesheet" media="screen,projection"/>
 
 </head>
 <body>
 
 <div class="container">
+<form class="col s12" method="POST" action="/add" modelAttribute="client">
 
-    <form class="col s12" name="book" action="booking" method="POST">
-        <input type="hidden" name="action" value="admin_update_user_profile">
-        <input type="hidden" name="id" value="${userProfile.id}">
+        <div class="row">
+                    <div class="input-field offset-s4 offset-m4 col s4 m4">
+                        <input id="id" type="text" name="id" class="validate" required disabled
+                               pattern="[0-9]{1,20}" value="${client.id}"
+                               title="id">
+                        <label for="id">Client id</label>
+                    </div>
+        </div>
         <div class="row">
             <div class="input-field col s4 m4">
-                <input id="firstName" type="text" name="firstName" class="validate" required
-                       pattern="[a-zA-Zа-яА-Я]{2,45}" value="${userProfile.firstName}"
-                       title="User Name">
-                <label for="firstName">User Name</label>
+                <input id="name" type="text" name="name" class="validate" required
+                       pattern="[a-zA-Z]{2,50}" value="${client.name}"
+                       title="First Name">
+                <label for="name">First Name</label>
             </div>
             <div class="input-field col s4 m4">
-                <input id="lastName" type="text" name="lastName" class="validate" required
-                       pattern="[a-zA-Zа-яА-Я]{2,45}" value="${userProfile.lastName}"
+                <input id="surname" type="text" name="surname" class="validate" required
+                       pattern="[a-zA-Z]{2,50}" value="${client.surname}"
                        title="Last Name">
-                <label for="lastName">Last Name</label>
+                <label for="surname">Last Name</label>
             </div>
             <div class="input-field col s4 m4">
-                <input id="middleName" type="text" name="middleName" class="validate"
-                       pattern="[a-zA-Zа-яА-Я]{0,45}" value="${userProfile.middleName}"
+                <input id="middleName" type="text" name="middleName" class="validate" required
+                       pattern="[a-zA-Z]{0,50}" value="${client.middleName}"
                        title="Middle Name">
                 <label for="middleName">Middle Name</label>
             </div>
         </div>
+
         <div class="row">
+
+                    <div class="input-field col s4 m4">
+                        <input id="birthday" type="text" name="birthday" class="datepicker" required
+                               value="${client.birthday}"
+                               title="Birthday">
+                        <label for="birthday">Birthday</label>
+                    </div>
+
+                    <div class="input-field col s4 m4">
+                        <input id="passportSeries" type="text" name="passportSeries" class="validate" required
+                               pattern="[A-Z]{2}" value="${client.passportSeries}"
+                               title="Passport Series">
+                        <label for="passportSeries">Passport Series</label>
+                    </div>
+                    <div class="input-field col s4 m4">
+                        <input id="passportNumber" type="text" name="passportNumber" class="validate" required
+                               pattern="[0-9]{7}" value="${client.passportNumber}"
+                               title="Passport Number">
+                        <label for="passportNumber">Passport Number</label>
+                    </div>
+        </div>
+        <%--
+        <div class="row">
+                            <div class="input-field col s4 m4">
+                                  <input id="issuedBy" type="text" name="issuedBy" class="validate" required
+                                         pattern="[\w\s]{1,100}" value="${client.issuedBy}"
+                                         title="Issued By">
+                                  <label for="issuedBy">Issued By</label>
+                            </div>
+                            <div class="input-field col s4 m4">
+                                <input id="issueDate" type="text" name="issueDate" class="datepicker" required
+                                       value="${client.issueDate}"
+                                       title="Issue Date">
+                                <label for="issueDate">Issue Date</label>
+                            </div>
+                            <div class="input-field col s4 m4">
+                                <input id="identNumber" type="text" name="identNumber" class="validate" required
+                                       pattern="[0-9]{7}[A-ZА-Я]{1}[0-9]{3}[A-ZА-Я]{2}[0-9]{1}" value="${client.identNumber}"
+                                       title="Ident Number">
+                                <label for="identNumber">Ident Number</label>
+                            </div>
+                </div>
+<div class="row">
             <div class="input-field col s4 m4">
-                <label for="balance">Balance</label>
-                <input disabled name="balance" id="balance" type="number" value="${userProfile.balance}">
+                <input id="birthdayPlace" type="text" name="birthdayPlace" class="validate" required
+                       pattern="[\w]{2,50}" value="${client.birthdayPlace}"
+                       title="Birthday Place">
+                <label for="birthdayPlace">Birthday Place</label>
             </div>
             <div class="input-field col s4 m4">
-                <input id="email" type="email" name="email" class="validate" value="${userProfile.email}"
-                       disabled title="Email">
+                <input id="address" type="text" name="address" class="validate" required
+                       pattern="[\-\,\.\w\s]{2,100}" value="${client.address}"
+                       title="Address">
+                <label for="address">Address</label>
+            </div>
+            <div class="input-field col s4 m4">
+                <input id="homeTelephone" type="text" name="homeTelephone" class="validate"
+                       pattern="[+]{0,1}[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*" value="${client.homeTelephone}"
+                       maxlength="20"
+                       title="Home Telephone">
+                <label for="homeTelephone">Home Telephone</label>
+            </div>
+        </div>
+<div class="row">
+            <div class="input-field col s4 m4">
+                <input id="mobilePhone" type="text" name="mobilePhone" class="validate"
+                       pattern="[+]{0,1}[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*" value="${client.mobilePhone}"
+                       maxlength="20"
+                       title="Mobile Phone">
+                <label for="mobilePhone">Mobile Phone</label>
+            </div>
+            <div class="input-field col s4 m4">
+                <input id="email" type="email" name="email" class="validate"
+                       value="${client.email}"
+                       maxlength="50"
+                       title="Email">
                 <label for="email">Email</label>
             </div>
             <div class="input-field col s4 m4">
-                <select id="role" name="role">
-                    <option value="" disabled>Role</option>
+                <input id="workplace" type="text" name="workplace" class="validate"
+                       pattern="[\w\s]{0,50}" value="${client.workplace}"
+                       title="Workplace">
+                <label for="workplace">Workplace</label>
+            </div>
+        </div>
+
+        <div class="row">
+                    <div class="input-field col s4 m4">
+                        <input id="position" type="text" name="position" class="validate"
+                               pattern="[\w\s]{0,30}" value="${client.position}"
+                               title="Position">
+                        <label for="position">Position</label>
+                    </div>
+
+                    <div class="input-field col s4 m4">
+                                    <select id="isPensioner" name="isPensioner" required>
+                                        <option value="" disabled>Pensioner</option>
+                                        <c:choose>
+                                            <c:when test="${client.isPensioner}">
+                                                <option selected value="true">True</option>
+                                                <option value="false">False</option>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="true">True</option>
+                                                <option selected value="false">False</option>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </select>
+                                    <label for="isPensioner">Pensioner</label>
+                                </div>
+
+                    <div class="input-field col s4 m4">
+                        <input id="salary" type="text" name="salary" class="validate"
+                               pattern="[0-9]{1,15}(\.[0-9]{1,3})?" value="${client.salary}"
+                               title="Salary">
+                        <label for="salary">Salary</label>
+                    </div>
+                </div>
+
+        <div class="row">
+       <div class="input-field col s4 m4">
+                                            <select id="disabilityDegree" name="disabilityDegree" >
+                                               <option selected value=${client.disabilityDegree.id} disabled>${client.disabilityDegree.disabilityDegree}</option>
+                                                        <option value=6>0</option>
+                                                        <option value=1>1</option>
+                                                        <option value=2>2</option>
+                                                        <option value=3>3</option>
+                                                        <option value=4>4</option>
+                                                        <option value=5>5</option>
+                                            </select>
+                                            <label for="disabilityDegree">Disability Degree</label>
+                                        </div>
+
+
+            <div class="input-field col s4 m4">
+                <select id="isMilitarity" name="isMilitarity" required>
+                    <option value="" disabled>Activity</option>
                     <c:choose>
-                        <c:when test="${userProfile.role.toString().equalsIgnoreCase('Admin')}">
-                            <option value="user">User</option>
-                            <option selected value="admin">Admin</option>
+                        <c:when test="${client.isMilitarity}">
+                            <option selected value="true">True</option>
+                            <option value="false">False</option>
                         </c:when>
                         <c:otherwise>
-                            <option selected value="user">User</option>
-                            <option value="admin">Admin</option>
+                            <option value="true">True</option>
+                            <option selected value="false">False</option>
                         </c:otherwise>
                     </c:choose>
                 </select>
-                <label for="role">Role</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s4 m4">
-                <input id="phoneNumber" type="text" name="phoneNumber" class="validate" maxlength="18" required
-                       pattern="((\+)?\d+?-?\d+-?\d+)|((\+\d+)?(\(\d{3}\))\d{7})|
-                               ((\+\d+)?(\(\d{3}\))(\(\d{3}\))?-?\d)|((\+-?(\d){3,18}))"
-                       value="${userProfile.phoneNumber}" title="Phone">
-                <label for="phoneNumber">Phone</label>
+                <label for="isMilitarity">Militarity</label>
             </div>
 
             <div class="input-field col s4 m4">
-                <select id="active" name="active">
-                    <option value="" disabled>Activity</option>
-                    <c:choose>
-                        <c:when test="${userProfile.active}">
-                            <option selected value="true">Active</option>
-                            <option value="false">Inactive</option>
-                        </c:when>
-                        <c:otherwise>
-                            <option value="true">Active</option>
-                            <option selected value="false">Inactive</option>
-                        </c:otherwise>
-                    </c:choose>
-                </select>
-                <label for="role">Activity</label>
-            </div>
+                                                        <select id="meritalStatus" name="meritalStatus" required>
+                                                            <option selected value=${client.meritalStatus.id} disabled>${client.meritalStatus.meritalStatus}</option>
+                                                                    <option value=1>Married</option>
+                                                                    <option value=2>Widowed</option>
+                                                                    <option value=3>Separated</option>
+                                                                    <option value=4>Divorced</option>
+                                                                    <option value=5>Single</option>
+                                                        </select>
+                                                        <label for="meritalStatus">Merital Status</label>
+                                                    </div>
         </div>
+
+        <div class="row">
+        <div class="input-field col s4 m4">
+                                                                <select id="citizenship" name="citizenship" required>
+                                                                    <option selected value=${client.citizenship.id} disabled>${client.citizenship.citizenship}</option>
+                                                                            <option value=1>American</option>
+                                                                            <option value=2>Australian</option>
+                                                                            <option value=3>Belarusian</option>
+                                                                            <option value=4>British</option>
+                                                                            <option value=5>Chinese</option>
+                                                                            <option value=6>Dutch</option>
+                                                                            <option value=7>Indian</option>
+                                                                            <option value=8>Japanese</option>
+                                                                            <option value=9>Mexican</option>
+                                                                            <option value=10>Russian</option>
+                                                                </select>
+                                                                <label for="citizenship">Citizenship</label>
+                                                            </div>
+                             <div class="input-field col s4 m4">
+                    <select id="city" name="city" required>
+                                    <option selected value=${client.city.id} disabled>${client.city.city}</option>
+                                                                                                <option value=1>Brest</option>
+                                                                                                <option value=2>Grodno</option>
+                                                                                                <option value=3>Gomel</option>
+                                                                                                <option value=4>Vitebsk</option>
+                                                                                                <option value=5>Minsk</option>
+                                                                                                <option value=6>Mogilev</option>
+                                                                                                <option value=7>Moscow</option>
+                                                                                                <option value=8>Kiev</option>
+                                                                                                <option value=9>St.Petersburg</option>
+                                                                                                <option value=10>Berlin</option>
+                                                                                                <option value=11>Begin</option>
+                                                                                                <option value=12>Canberra</option>
+                                                                                                <option value=13>Tokyo</option>
+                                                                                                <option value=14>Mexico</option>
+                                                                                                <option value=15>Delhi</option>
+                                                                                    </select>
+                                                                                    <label for="city">City</label>
+                                                                                </div>
+                </div>
+--%>
         <div class="row">
             <button class="col s6 m2 offset-s3 offset-m5 btn amber accent-4 amber accent-4 waves-effect waves-light center"
                     type="submit">
-                Change
+                Update
             </button>
         </div>
-    </form>
+   </form>
 
     <%--<c:forEach items="${clients}" var="client">--%>
           <%--${}--%>
     <%--</c:forEach>--%>
 </div>
 
-<script src="js/jquery-2.1.1.min.js"></script>
-<script src="js/materialize.js"></script>
-<script src="js/init.js"></script>
+<script src="<c:url value="js/jquery-2.1.1.min.js" />"></script>
+<script src="<c:url value="js/materialize.js" />"></script>
+<script src="<c:url value="js/init.js" />"></script>
 
 </body>
 
@@ -123,6 +283,7 @@
 
 <script>
     $('.datepicker').pickadate({
+        format: "yyyy-mm-dd",
         selectMonths: true, // Creates a dropdown to control month
         selectYears: 15, // Creates a dropdown of 15 years to control year,
         today: 'Today',
