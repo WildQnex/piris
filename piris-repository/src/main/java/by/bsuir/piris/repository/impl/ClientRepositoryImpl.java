@@ -23,4 +23,12 @@ public class ClientRepositoryImpl {
         query.where(entityManager.getCriteriaBuilder().notEqual(clientRoot.get("id"), 0));
         return entityManager.createQuery(query).getResultList();
     }
+
+    @Transactional
+    public Client getClient(long id){
+        CriteriaQuery<Client> query = entityManager.getCriteriaBuilder().createQuery(Client.class);
+        Root<Client> clientRoot = query.from(Client.class);
+        query.where(entityManager.getCriteriaBuilder().equal(clientRoot.get("id"), id));
+        return entityManager.createQuery(query).getSingleResult();
+    }
 }

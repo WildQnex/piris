@@ -15,9 +15,9 @@ import javax.persistence.Table;
 public class DisabilityDegree {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_disabiity", nullable = false)
+    @Column(name = "id_disability", nullable = false)
     private long id;
 
-    @Column(name = "disabilityDegree", nullable = false)
+    @Column(name = "disability_degree", nullable = false)
     private int disabilityDegree;
 }

@@ -18,6 +18,6 @@ public class City {
     @Column(name = "id_city", nullable = false)
     private long id;
 
-    @Column(name = "city", nullable = false)
+    @Column(name = "city_name", nullable = false)
     private String city;
 }

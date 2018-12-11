@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-//@EnableAutoConfiguration
+@EnableAutoConfiguration
 @SpringBootApplication(scanBasePackages = "by.bsuir.piris")
 public class SpringBootWebApplication extends SpringBootServletInitializer {
 

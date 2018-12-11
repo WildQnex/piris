@@ -50,7 +50,7 @@ public class Client {
     @Column(name = "issued_by", nullable = false)
     private String issuedBy;
 
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "issue_date", nullable = false)
     private LocalDate issueDate;
 
@@ -79,13 +79,13 @@ public class Client {
     private String position;
 
     @Column(name = "pensioner")
-    private boolean isPensioner;
+    private boolean pensioner;
 
     @Column(name = "salary")
     private BigDecimal salary;
 
     @Column(name = "militarity")
-    private boolean isMilitarity;
+    private boolean militarity;
 
     @ManyToOne
     @JoinColumn(name = "id_disability")
