@@ -31,4 +31,23 @@ public class ClientRepositoryImpl {
         query.where(entityManager.getCriteriaBuilder().equal(clientRoot.get("id"), id));
         return entityManager.createQuery(query).getSingleResult();
     }
+
+    @Transactional
+    public boolean create(Client client) {
+        entityManager.joinTransaction();
+        entityManager.persist(client);
+        return true;
+    }
+
+    @Transactional
+    public Client update(Client client) {
+        entityManager.joinTransaction();
+        return entityManager.merge(client);
+    }
+
+    @Transactional
+    public void delete(long id) {
+        entityManager.joinTransaction();
+        entityManager.remove(getClient(id));
+    }
 }

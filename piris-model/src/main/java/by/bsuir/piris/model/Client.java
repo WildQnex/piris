@@ -102,4 +102,66 @@ public class Client {
     @ManyToOne
     @JoinColumn(name = "id_city")
     private City city;
+
+    public Client(){}
+
+    public Client(ClientDto clientDto)
+    {
+        this.id = clientDto.getId();
+
+        this.surname = clientDto.getSurname();
+
+        this.name = clientDto.getName();
+
+        this.middleName = clientDto.getMiddleName();
+
+        this.birthday = clientDto.getBirthday();
+
+        this.passportSeries = clientDto.getPassportSeries();
+
+        this.passportNumber = clientDto.getPassportNumber();
+
+        this.issuedBy = clientDto.getIssuedBy();
+
+        this.issueDate = clientDto.getIssueDate();
+
+        this.identNumber = clientDto.getIdentNumber();
+
+        this.birthdayPlace = clientDto.getBirthdayPlace();
+
+        this.address = clientDto.getAddress();
+
+        this.homeTelephone = clientDto.getHomeTelephone();
+
+        this.mobilePhone = clientDto.getMobilePhone();
+
+        this.email = clientDto.getEmail();
+
+        this.workplace = clientDto.getWorkplace();
+
+        this.position = clientDto.getPosition();
+
+        this.pensioner = clientDto.isPensioner();
+
+        this.salary = clientDto.getSalary();
+
+        this.militarity = clientDto.isMilitarity();
+
+        DisabilityDegree disabilityDegree = new DisabilityDegree();
+        disabilityDegree.setId(clientDto.getDisability());
+        this.disabilityDegree = disabilityDegree;
+
+        MeritalStatus meritalStatus = new MeritalStatus();
+        meritalStatus.setId(clientDto.getMeritalStatus());
+        this.meritalStatus = meritalStatus;
+
+        Citizenship citizenship = new Citizenship();
+        citizenship.setId(clientDto.getCitizenship());
+        this.citizenship = citizenship;
+
+        City city = new City();
+        city.setId(clientDto.getCity());
+        this.city = city;
+
+    }
 }
