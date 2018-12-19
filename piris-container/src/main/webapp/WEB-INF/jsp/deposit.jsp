@@ -17,6 +17,7 @@
 <div class="container">
     <div class="row">&nbsp</div>
     <div class="row">&nbsp</div>
+    <div class="row" style="text-align: center"><h4>Deposit</h4></div>
     <div class="row">&nbsp</div>
     <form class="col s12" method="POST" action="/api/bank/deposit/add" modelAttribute="CreditContract">
 

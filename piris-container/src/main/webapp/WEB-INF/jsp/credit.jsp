@@ -17,7 +17,7 @@
 <div class="container">
     <div class="row">&nbsp</div>
     <div class="row">&nbsp</div>
-    <div class="row">&nbsp</div>
+    <div class="row" style="text-align: center">Credit</div>
     <form class="col s12" method="POST" action="/api/bank/credit/add" modelAttribute="CreditContract">
 
     <div class="row">

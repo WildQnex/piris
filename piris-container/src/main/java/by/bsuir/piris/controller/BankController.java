@@ -4,6 +4,7 @@ import by.bsuir.piris.model.BankAccount;
 import by.bsuir.piris.model.Client;
 import by.bsuir.piris.model.ClientDto;
 import by.bsuir.piris.model.CreditContract;
+import by.bsuir.piris.model.DepositContract;
 import by.bsuir.piris.repository.BankRepository;
 import by.bsuir.piris.repository.impl.ClientRepositoryImpl;
 import by.bsuir.piris.util.Helper;
@@ -49,11 +50,34 @@ public class BankController
         return modelAndView;
     }
 
+    @GetMapping("/deposit")
+    public ModelAndView deposit()
+    {
+        ModelAndView modelAndView = new ModelAndView("deposit");
+        return modelAndView;
+    }
+
+    @GetMapping("/credits")
+    public ModelAndView credits()
+    {
+        ModelAndView modelAndView = new ModelAndView("credits");
+        modelAndView.addObject("credits", BankRepository.getCreditContracts());
+        return modelAndView;
+    }
+
+    @GetMapping("/deposits")
+    public ModelAndView deposits()
+    {
+        ModelAndView modelAndView = new ModelAndView("deposits");
+        modelAndView.addObject("deposits", BankRepository.getDepositeContracts());
+        return modelAndView;
+    }
+
     @PostMapping("/credit/add")
     public ModelAndView creditAdd(@ModelAttribute CreditContract contract)
     {
         contract.setNumber(Helper.getNextCreditAccountNumber());
-        contract.setDaysAmount(ChronoUnit.DAYS.between(contract.getEndDate(), contract.getStartDate()));
+        contract.setDaysAmount(ChronoUnit.DAYS.between(contract.getStartDate(), contract.getEndDate()));
         BankAccount account = new BankAccount();
         account.setActive(true);
         account.setSaldo(contract.getMoney());
@@ -67,33 +91,37 @@ public class BankController
         percentAccount.setDollar(contract.isDollar());
         percentAccount.setNumber(Helper.getNextCreditAccountNumber());
         percentAccount.setClient(user);
+        BankRepository.addAccount(account);
+        BankRepository.addAccount(percentAccount);
         contract.setAccount(account);
         contract.setPercentAccount(percentAccount);
-        System.out.println(contract);
+        BankRepository.addCreditContract(contract);
         return new ModelAndView("index");
     }
 
     @PostMapping("/deposit/add")
-    public ModelAndView depositeAdd(@ModelAttribute CreditContract contract)
+    public ModelAndView depositeAdd(@ModelAttribute DepositContract contract)
     {
-        contract.setNumber(Helper.getNextCreditAccountNumber());
-        contract.setDaysAmount(ChronoUnit.DAYS.between(contract.getEndDate(), contract.getStartDate()));
+        contract.setNumber(Helper.getNextDepositAccountNumber());
+        contract.setDaysAmount(ChronoUnit.DAYS.between(contract.getStartDate(), contract.getEndDate()));
         BankAccount account = new BankAccount();
-        account.setActive(true);
+        account.setActive(false);
         account.setSaldo(contract.getMoney());
         account.setDollar(contract.isDollar());
         account.setNumber(contract.getNumber());
         Client user = clientRepository.getClient(contract.getId());
         account.setClient(user);
         BankAccount percentAccount = new BankAccount();
-        percentAccount.setActive(true);
+        percentAccount.setActive(false);
         percentAccount.setSaldo(0);
         percentAccount.setDollar(contract.isDollar());
-        percentAccount.setNumber(Helper.getNextCreditAccountNumber());
+        percentAccount.setNumber(Helper.getNextDepositAccountNumber());
         percentAccount.setClient(user);
+        BankRepository.addAccount(account);
+        BankRepository.addAccount(percentAccount);
         contract.setAccount(account);
         contract.setPercentAccount(percentAccount);
-        System.out.println(contract);
+        BankRepository.addDepositeContract(contract);
         return new ModelAndView("index");
     }
 }

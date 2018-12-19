@@ -21,11 +21,20 @@
     <div class="row">&nbsp</div>
     <div class="row">&nbsp</div>
     <div class="row">&nbsp</div>
-    <a href="/api/bank/accounts" class="waves-effect waves-light btn">Accounts</a>
-    <a href="/api/bank/deposit" class="waves-effect waves-light btn">Create deposit</a>
-    <a href="/api/bank/credit" class="waves-effect waves-light btn">Take credit</a>
-    <a href="/api/bank/close/bank/day" class="waves-effect waves-light btn">Close bank day</a>
-
+    <div class="row">
+        <a href="/api/bank/accounts" class="waves-effect waves-light btn">Accounts</a>
+    </div>
+    <div class="row">
+        <a href="/api/bank/deposits" class="waves-effect waves-light btn">Deposit list</a>
+        <a href="/api/bank/credit" class="waves-effect waves-light btn">Credit list</a>
+    </div>
+    <div class="row">
+        <a href="/api/bank/deposit" class="waves-effect waves-light btn">Create deposit</a>
+        <a href="/api/bank/credit" class="waves-effect waves-light btn">Take credit</a>
+    </div>
+    <div class="row">
+        <a href="/api/bank/close/bank/day" class="waves-effect waves-light btn">Close bank day</a>
+    </div>
 </div>
 
 <script src="<c:url value="../../js/jquery-2.1.1.min.js" />"></script>

@@ -14,18 +14,34 @@
 </head>
 <body>
 
-<div class="container" style="text-align: center">
-    <div class="row">&nbsp</div>
-    <div class="row">&nbsp</div>
-    <div class="row">&nbsp</div>
-    <div class="row">&nbsp</div>
-    <div class="row">&nbsp</div>
-    <div class="row">&nbsp</div>
-    <a href="/api/bank/accounts" class="waves-effect waves-light btn">Accounts</a>
-    <a href="/api/bank/credit/add" class="waves-effect waves-light btn">Create deposit</a>
-    <a href="/api/bank/deposit" class="waves-effect waves-light btn">Take credit</a>
-    <a href="/api/bank/close/bank/day" class="waves-effect waves-light btn">Close bank day</a>
+<div class="container">
 
+<ul class="collapsible popout" data-collapsible="accordion">
+                <c:forEach items="${credits}" var="credit">
+                    <li>
+                        <div class="collapsible-header">
+                            <a>Credit contract number: &nbsp</a> ${credit.number} &nbsp|&nbsp  <c:choose>
+                                                        <c:when test="${credit.isDiff()}">
+                                                            Differencial
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            Whole
+                                                        </c:otherwise>
+                                                        </c:choose>
+                        </div>
+                        <div class="collapsible-body">
+                            <a>Money:&nbsp</a> ${credit.money} <c:choose>
+                                             <c:when test="${credit.isDollar()}">
+                                                 $
+                                             </c:when>
+                                             <c:otherwise>
+                                                 p.
+                                             </c:otherwise>
+                                             </c:choose>
+                        </div>
+                    </li>
+                </c:forEach>
+            </ul>
 </div>
 
 <script src="<c:url value="../../js/jquery-2.1.1.min.js" />"></script>
@@ -35,6 +51,16 @@
 </body>
 
 <script>
+    $(document).ready(function() {
+        $('.delete').click(function() {
+            if (confirm('Do you really want to delete user?')) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+    });
+
     $(document).ready(function () {
         $('select').material_select();
     });

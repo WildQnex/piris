@@ -14,7 +14,7 @@ public class DepositContract {
     private LocalDate startDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
-    private int daysAmount;
+    private long daysAmount;
     private long money;
     private int percent;
     private long id;

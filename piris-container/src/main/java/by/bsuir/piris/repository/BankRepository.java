@@ -1,6 +1,8 @@
 package by.bsuir.piris.repository;
 
 import by.bsuir.piris.model.BankAccount;
+import by.bsuir.piris.model.CreditContract;
+import by.bsuir.piris.model.DepositContract;
 import by.bsuir.piris.util.Helper;
 
 import java.util.ArrayList;
@@ -9,7 +11,8 @@ import java.util.List;
 public class BankRepository {
 
     private static List<BankAccount> accounts;
-
+    private static List<CreditContract> creditContracts;
+    private static List<DepositContract> depositContracts;
     private static BankAccount bankFond;
 
     static {
@@ -20,6 +23,9 @@ public class BankRepository {
         bankFond.setSaldo(100_000_000);
 
         accounts.add(bankFond);
+
+        creditContracts = new ArrayList<>();
+        depositContracts = new ArrayList<>();
     }
 
     public static List<BankAccount> getAccounts()
@@ -49,4 +55,26 @@ public class BankRepository {
                     acc.setClient(bankAccount.getClient());
                 });
     }
+
+    public static List<CreditContract> getCreditContracts()
+    {
+        return creditContracts;
+    }
+
+    public static List<DepositContract> getDepositeContracts()
+    {
+        return depositContracts;
+    }
+
+    public static void addCreditContract(CreditContract creditContract)
+    {
+        creditContracts.add(creditContract);
+    }
+
+    public static void addDepositeContract(DepositContract depositContract)
+    {
+        depositContracts.add(depositContract);
+    }
+
+
 }
