@@ -31,7 +31,7 @@
             <div class="input-field col s4 m4">
                 <input id="name" type="text" name="name" class="validate" required
                        pattern="[\w]{2,50}" value="${client.name}"
-                       title="You should enter your name using latin or cyrilic alphabet without any spaces">
+                       title="Имя должно состоять из букв латинского или кириллического алфавита">
                 <label for="name">First Name</label>
             </div>
             <div class="input-field col s4 m4">

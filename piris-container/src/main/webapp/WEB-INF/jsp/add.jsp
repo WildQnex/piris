@@ -22,20 +22,20 @@
         <div class="row">
             <div class="input-field col s4 m4">
                 <input id="name" type="text" name="name" class="validate" required
-                       pattern="[\w]{2,50}" value="${client.name}"
-                       title="You should enter your name using latin or cyrilic alphabet without any spaces">
+                       pattern="[A-ZА-Яa-zа-я]{2,50}" value="${client.name}"
+                       title="Name should contain only Latin characters from 2 to 50 symbols">
                 <label for="name">First Name</label>
             </div>
             <div class="input-field col s4 m4">
                 <input id="surname" type="text" name="surname" class="validate" required
                        pattern="[\w]{2,50}" value="${client.surname}"
-                       title="Last Name">
+                       title="Surname should contain only Latin characters from 2 to 50 symbols">
                 <label for="surname">Last Name</label>
             </div>
             <div class="input-field col s4 m4">
                 <input id="middleName" type="text" name="middleName" class="validate" required
                        pattern="[\w]{0,50}" value="${client.middleName}"
-                       title="Middle Name">
+                       title="Middle name should contain only Latin characters up to 50 symbols">
                 <label for="middleName">Middle Name</label>
             </div>
         </div>
@@ -52,13 +52,13 @@
             <div class="input-field col s4 m4">
                 <input id="passportSeries" type="text" name="passportSeries" class="validate" required
                        pattern="[A-ZА-Я]{2}" value="${client.passportSeries}"
-                       title="Passport Series">
+                       title="Passport series should contains 2 upper case latin characters">
                 <label for="passportSeries">Passport Series</label>
             </div>
             <div class="input-field col s4 m4">
                 <input id="passportNumber" type="text" name="passportNumber" class="validate" required
                        pattern="[0-9]{7}" value="${client.passportNumber}"
-                       title="Passport Number">
+                       title="Passport Number should contains 7 numbers">
                 <label for="passportNumber">Passport Number</label>
             </div>
         </div>
@@ -67,7 +67,7 @@
             <div class="input-field col s4 m4">
                 <input id="issuedBy" type="text" name="issuedBy" class="validate" required
                        pattern="[\w\s]{1,100}" value="${client.issuedBy}"
-                       title="Issued By">
+                       title="Issued By field should have length up to 100 symbols">
                 <label for="issuedBy">Issued By</label>
             </div>
 
@@ -81,7 +81,7 @@
             <div class="input-field col s4 m4">
                 <input id="identNumber" type="text" name="identNumber" class="validate" required
                        pattern="[0-9]{7}[A-ZА-Я]{1}[0-9]{3}[A-ZА-Я]{2}[0-9]{1}" value="${client.identNumber}"
-                       title="Ident Number">
+                       title="Ident Number field format - 7 digits, then 1 upper case latin character, then 3 digits, then 2 latin characters, then 1 digit]">
                 <label for="identNumber">Ident Number</label>
             </div>
         </div>
@@ -90,13 +90,13 @@
             <div class="input-field col s4 m4">
                 <input id="birthdayPlace" type="text" name="birthdayPlace" class="validate" required
                        pattern="[\w]{2,50}" value="${client.birthdayPlace}"
-                       title="Birthday Place">
+                       title="Birthday Place length from 2 to 50 latin alphabet characters">
                 <label for="birthdayPlace">Birthday Place</label>
             </div>
             <div class="input-field col s4 m4">
                 <input id="address" type="text" name="address" class="validate" required
                        pattern="[\-\,\.\w\s]{2,100}" value="${client.address}"
-                       title="Address">
+                       title="Client address field should be from 2 to 100 symbols">
                 <label for="address">Address</label>
             </div>
             <div class="input-field col s4 m4">
