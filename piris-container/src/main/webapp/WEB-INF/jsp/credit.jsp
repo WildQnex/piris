@@ -31,12 +31,12 @@
             </div>
             <div class="row">
                         <div class="input-field col s4 offset-s4">
-                            <select id="currency" name="diff" required>
+                            <select id="dollar" name="dollar" required>
                                 <option value="" disabled>Currency</option>
-                                <option value="false">Belarussian ruble </option>
+                                <option value="false">Belarussian ruble</option>
                                 <option value="true">Dollar</option>
                             </select>
-                            <label for="pensioner">Currency</label>
+                            <label for="dollar">Currency</label>
                         </div>
             </div>
             <div class="row">

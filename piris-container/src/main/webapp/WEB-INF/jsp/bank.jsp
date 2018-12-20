@@ -33,7 +33,7 @@
         <a href="/api/bank/credit" class="waves-effect waves-light btn">Take credit</a>
     </div>
     <div class="row">
-        <a href="/api/bank/close/bank/day" class="waves-effect waves-light btn">Close bank day</a>
+        <a href="/api/bank/close/day" class="waves-effect waves-light btn">Close bank day</a>
     </div>
 </div>
 

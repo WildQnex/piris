@@ -23,6 +23,7 @@
     <div class="row">&nbsp</div>
     <a href="/api/clients" class="waves-effect waves-light btn">User Management</a>
     <a href="/api/bank" class="waves-effect waves-light btn">Bank accounts</a>
+    <a href="/api/atm" class="waves-effect waves-light btn">ATM</a>
 
 </div>
 

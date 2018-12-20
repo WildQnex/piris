@@ -7,15 +7,15 @@ import java.time.LocalDate;
 
 @Data
 public class DepositContract {
-    private boolean isRevocable;
+    private boolean revocable;
     private long number;
-    private boolean isDollar;
+    private boolean dollar;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
     private long daysAmount;
-    private long money;
+    private double money;
     private int percent;
     private long id;
     private Client user;

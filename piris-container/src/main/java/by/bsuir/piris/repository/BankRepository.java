@@ -71,10 +71,36 @@ public class BankRepository {
         creditContracts.add(creditContract);
     }
 
-    public static void addDepositeContract(DepositContract depositContract)
+    public static void addDepositContract(DepositContract depositContract)
     {
         depositContracts.add(depositContract);
     }
 
+    public static BankAccount getBankFond() {
+        return bankFond;
+    }
 
+    public static void transaction(BankAccount to, BankAccount from, double money)
+    {
+        if(from.isDollar() && to.isDollar())
+        {
+            from.withdrawMoney(money);
+            to.addMoney(money);
+        }else if(!from.isDollar() && !to.isDollar())
+        {
+            from.withdrawMoney(money);
+            to.addMoney(money);
+        }else if(from.isDollar() && !to.isDollar())
+        {
+            from.withdrawMoney(money);
+            to.addMoney((money * Helper.CURRENCY_RATE));
+        }else if(!from.isDollar() && to.isDollar())
+        {
+            System.out.println(money);
+            System.out.println((long)(money / Helper.CURRENCY_RATE));
+            from.withdrawMoney(money);
+            to.addMoney((money / Helper.CURRENCY_RATE));
+        }
+
+    }
 }

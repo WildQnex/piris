@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 @Controller
 @RequestMapping("/api/bank")
@@ -80,7 +82,6 @@ public class BankController
         contract.setDaysAmount(ChronoUnit.DAYS.between(contract.getStartDate(), contract.getEndDate()));
         BankAccount account = new BankAccount();
         account.setActive(true);
-        account.setSaldo(contract.getMoney());
         account.setDollar(contract.isDollar());
         account.setNumber(contract.getNumber());
         Client user = clientRepository.getClient(contract.getId());
@@ -96,11 +97,12 @@ public class BankController
         contract.setAccount(account);
         contract.setPercentAccount(percentAccount);
         BankRepository.addCreditContract(contract);
+        BankRepository.transaction(account, BankRepository.getBankFond(), contract.getMoney());
         return new ModelAndView("index");
     }
 
     @PostMapping("/deposit/add")
-    public ModelAndView depositeAdd(@ModelAttribute DepositContract contract)
+    public ModelAndView depositAdd(@ModelAttribute DepositContract contract)
     {
         contract.setNumber(Helper.getNextDepositAccountNumber());
         contract.setDaysAmount(ChronoUnit.DAYS.between(contract.getStartDate(), contract.getEndDate()));
@@ -121,7 +123,57 @@ public class BankController
         BankRepository.addAccount(percentAccount);
         contract.setAccount(account);
         contract.setPercentAccount(percentAccount);
-        BankRepository.addDepositeContract(contract);
+        BankRepository.addDepositContract(contract);
+        BankRepository.transaction(BankRepository.getBankFond(), account, contract.getMoney());
         return new ModelAndView("index");
+    }
+
+    @GetMapping("/close/day")
+    public ModelAndView closeDay()
+    {
+        System.out.println(BankRepository.getAccounts());
+        List<CreditContract> creditContracts = BankRepository.getCreditContracts();
+        creditContracts.stream().filter(c -> !c.isDiff()).forEach(c -> {
+            if (c.getEndDate().isAfter(LocalDate.now()))
+            {
+                BankRepository.transaction(BankRepository.getBankFond(), c.getPercentAccount(), c.getMoney() * c.getPercent() / 100 / 365);
+            }
+            if (c.getEndDate().isEqual(LocalDate.now()))
+            {
+                BankRepository.transaction(BankRepository.getBankFond(), c.getAccount(), c.getMoney());
+            }
+        });
+        creditContracts.stream().filter(CreditContract::isDiff).forEach(c -> {
+            if (c.getEndDate().isAfter(LocalDate.now()))
+            {
+                BankRepository.transaction(BankRepository.getBankFond(), c.getPercentAccount(), c.getMoney() * c.getPercent() / 100 / 365);
+            }
+            if (c.getEndDate().isEqual(LocalDate.now()))
+            {
+                BankRepository.transaction(BankRepository.getBankFond(), c.getAccount(), c.getMoney());
+            }
+        });
+        List<DepositContract> depositContracts = BankRepository.getDepositeContracts();
+        depositContracts.stream().filter(c -> !c.isRevocable()).forEach(c -> {
+            if (c.getEndDate().isAfter(LocalDate.now()))
+            {
+                BankRepository.transaction(c.getPercentAccount(), BankRepository.getBankFond(), c.getMoney() * c.getPercent() / 100 / 365);
+            }
+            if (c.getEndDate().isEqual(LocalDate.now()))
+            {
+                BankRepository.transaction(c.getAccount(), BankRepository.getBankFond(), c.getMoney());
+            }
+        });
+        depositContracts.stream().filter(DepositContract::isRevocable).forEach(c -> {
+            if (c.getEndDate().isAfter(LocalDate.now()))
+            {
+                BankRepository.transaction(c.getPercentAccount(), BankRepository.getBankFond(), c.getMoney() * c.getPercent() / 100 / 365);
+            }
+            if (c.getEndDate().isEqual(LocalDate.now()))
+            {
+                BankRepository.transaction(c.getAccount(), BankRepository.getBankFond(), c.getMoney());
+            }
+        });
+        return new ModelAndView("bank");
     }
 }
